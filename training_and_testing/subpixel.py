@@ -2,13 +2,14 @@ from __future__ import absolute_import
 
 from keras import backend as K
 from keras.engine import Layer
-from keras.utils.generic_utils import get_custom_objects
 from keras.utils.conv_utils import normalize_data_format
+from keras.utils.generic_utils import get_custom_objects
 
 if K.backend() == 'theano':
     import theano_backend as K_BACKEND
 else:
     import tensorflow_backend as K_BACKEND
+
 
 class SubPixelUpscaling(Layer):
     """ Sub-pixel convolutional upscaling layer based on the paper "Real-Time Single Image

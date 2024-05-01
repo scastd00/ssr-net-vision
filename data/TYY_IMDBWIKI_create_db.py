@@ -1,8 +1,9 @@
-import numpy as np
-import cv2
-import scipy.io
 import argparse
+
+import cv2
+import numpy as np
 from tqdm import tqdm
+
 from TYY_utils import get_meta
 
 
@@ -55,7 +56,9 @@ def main():
         img = cv2.imread(root_path + str(full_path[i][0]))
         out_imgs.append(cv2.resize(img, (img_size, img_size)))
 
-    np.savez(output_path,image=np.array(out_imgs), gender=np.array(out_genders), age=np.array(out_ages), img_size=img_size)
+    np.savez(output_path, image=np.array(out_imgs), gender=np.array(out_genders), age=np.array(out_ages),
+             img_size=img_size)
+
 
 if __name__ == '__main__':
     main()

@@ -1,8 +1,10 @@
-import pandas as pd
-import matplotlib.pyplot as plt
 import argparse
 import os
+
+import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+
 
 def get_args():
     parser = argparse.ArgumentParser(description="This script shows training graph from history file.")
@@ -31,8 +33,8 @@ def main():
     plt.plot(df["mean_absolute_error"], '-o', label="training", linewidth=2.0)
     plt.plot(df["val_mean_absolute_error"], '-o', label="validation", linewidth=2.0)
     ax = plt.gca()
-    ax.set_ylim([2,13])
-    ax.set_aspect(0.6/ax.get_data_ratio())
+    ax.set_ylim([2, 13])
+    ax.set_aspect(0.6 / ax.get_data_ratio())
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
     plt.xlabel("Number of epochs", fontsize=20)

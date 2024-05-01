@@ -7,6 +7,9 @@
       <excludeFolder url="file://$MODULE_DIR$/.venv/bin" />
       <excludeFolder url="file://$MODULE_DIR$/.venv/include" />
       <excludeFolder url="file://$MODULE_DIR$/.venv/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/data/imdb_crop" />
+      <excludeFolder url="file://$MODULE_DIR$/data/wiki_crop" />
+      <excludeFolder url="file://$MODULE_DIR$/demo/img" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

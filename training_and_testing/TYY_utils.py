@@ -1,7 +1,9 @@
-from scipy.io import loadmat
-from datetime import datetime
 import os
+from datetime import datetime
+
 import numpy as np
+from scipy.io import loadmat
+
 
 def calc_age(taken, dob):
     birth = datetime.fromordinal(max(int(dob) - 366, 1))
@@ -31,13 +33,15 @@ def load_data(mat_path):
 
     return d["image"], d["gender"][0], d["age"][0], d["db"][0], d["img_size"][0, 0], d["min_score"][0, 0]
 
+
 def load_data_npz(npz_path):
     d = np.load(npz_path)
 
     return d["image"], d["gender"], d["age"], d["img_size"]
 
+
 def mk_dir(dir):
     try:
-        os.mkdir( dir )
+        os.mkdir(dir)
     except OSError:
         pass

@@ -3,27 +3,25 @@
 - [Densely Connected Convolutional Networks](https://arxiv.org/pdf/1608.06993.pdf)
 - [The One Hundred Layers Tiramisu: Fully Convolutional DenseNets for Semantic Segmentation](https://arxiv.org/pdf/1611.09326.pdf)
 '''
-from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
+from __future__ import print_function
 
 import warnings
 
-from keras.models import Model
-from keras.layers.core import Dense, Dropout, Activation, Reshape
-from keras.layers.convolutional import Conv2D, Conv2DTranspose, UpSampling2D
-from keras.layers.pooling import AveragePooling2D, MaxPooling2D
-from keras.layers.pooling import GlobalAveragePooling2D
-from keras.layers import Input
-from keras.layers.merge import concatenate
-from keras.layers.normalization import BatchNormalization
-from keras.regularizers import l2
-from keras.utils.layer_utils import convert_all_kernels_in_model, convert_dense_weights_data_format
-from keras.utils.data_utils import get_file
-from keras.engine.topology import get_source_inputs
-from keras.applications.imagenet_utils import _obtain_input_shape
-from keras.applications.imagenet_utils import decode_predictions
 import keras.backend as K
+from keras.engine.topology import get_source_inputs
+from keras.layers import AveragePooling2D, MaxPooling2D
+from keras.layers import BatchNormalization
+from keras.layers import Conv2D, Conv2DTranspose, UpSampling2D
+from keras.layers import Dense, Dropout, Activation, Reshape
+from keras.layers import GlobalAveragePooling2D
+from keras.layers import Input
+from keras.layers import concatenate
+from keras.models import Model
+from keras.regularizers import l2
+from keras.utils.data_utils import get_file
+from keras.utils.layer_utils import convert_all_kernels_in_model
 
 from subpixel import SubPixelUpscaling
 
@@ -33,6 +31,7 @@ DENSENET_169_WEIGHTS_PATH = r'https://github.com/titu1994/DenseNet/releases/down
 DENSENET_121_WEIGHTS_PATH_NO_TOP = r'https://github.com/titu1994/DenseNet/releases/download/v3.0/DenseNet-BC-121-32-no-top.h5'
 DENSENET_161_WEIGHTS_PATH_NO_TOP = r'https://github.com/titu1994/DenseNet/releases/download/v3.0/DenseNet-BC-161-48-no-top.h5'
 DENSENET_169_WEIGHTS_PATH_NO_TOP = r'https://github.com/titu1994/DenseNet/releases/download/v3.0/DenseNet-BC-169-32-no-top.h5'
+
 
 def preprocess_input(x, data_format=None):
     """Preprocesses a tensor encoding a batch of images.
@@ -69,7 +68,7 @@ def preprocess_input(x, data_format=None):
         x[..., 1] -= 116.779
         x[..., 2] -= 123.68
 
-    x *= 0.017 # scale values
+    x *= 0.017  # scale values
 
     return x
 
@@ -761,7 +760,8 @@ def __create_fcn_dense_net(nb_classes, img_input, include_top, nb_dense_block=5,
         x = concatenate([t, skip_list[block_idx]], axis=concat_axis)
 
         # Dont allow the feature map size to grow in upsampling dense blocks
-        x_up, nb_filter, concat_list = __dense_block(x, nb_layers[nb_dense_block + block_idx + 1], nb_filter=growth_rate,
+        x_up, nb_filter, concat_list = __dense_block(x, nb_layers[nb_dense_block + block_idx + 1],
+                                                     nb_filter=growth_rate,
                                                      growth_rate=growth_rate, dropout_rate=dropout_rate,
                                                      weight_decay=weight_decay, return_concat_list=True,
                                                      grow_nb_filters=False)
@@ -781,4 +781,3 @@ def __create_fcn_dense_net(nb_classes, img_input, include_top, nb_dense_block=5,
         x = x_up
 
     return x
-

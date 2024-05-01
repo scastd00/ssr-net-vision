@@ -1,11 +1,13 @@
 import tensorflow as tf
 
-from keras.backend import tensorflow_backend as KTF
 from keras.backend.common import image_data_format
-#from keras.backend.tensorflow_backend import _preprocess_conv2d_input
-#from keras.backend.tensorflow_backend import _postprocess_conv2d_output
+
+# from keras.backend.tensorflow_backend import _preprocess_conv2d_input
+# from keras.backend.tensorflow_backend import _postprocess_conv2d_output
 
 py_all = all
+
+
 def _preprocess_conv2d_input(x, data_format):
     """Transpose and cast the input before the conv2d.
     # Arguments
@@ -40,6 +42,7 @@ def _postprocess_conv2d_output(x, data_format):
     if floatx() == 'float64':
         x = tf.cast(x, 'float64')
     return x
+
 
 def depth_to_space(input, scale, data_format=None):
     ''' Uses phase shift algorithm to convert channels/depth for spatial resolution '''
