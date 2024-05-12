@@ -10,7 +10,6 @@ from __future__ import print_function
 import warnings
 
 import keras.backend as K
-from keras.engine.topology import get_source_inputs
 from keras.layers import AveragePooling2D, MaxPooling2D
 from keras.layers import BatchNormalization
 from keras.layers import Conv2D, Conv2DTranspose, UpSampling2D
@@ -20,8 +19,8 @@ from keras.layers import Input
 from keras.layers import concatenate
 from keras.models import Model
 from keras.regularizers import l2
-from keras.utils.data_utils import get_file
-from keras.utils.layer_utils import convert_all_kernels_in_model
+from keras.utils import get_file
+from keras.utils import get_source_inputs
 
 from subpixel import SubPixelUpscaling
 
@@ -222,7 +221,8 @@ def DenseNet(input_shape=None, depth=40, nb_dense_block=3, growth_rate=12, nb_fi
 
         if weights_loaded:
             if K.backend() == 'theano':
-                convert_all_kernels_in_model(model)
+                print("Using theano")
+                # convert_all_kernels_in_model(model)
 
             if K.image_data_format() == 'channels_first' and K.backend() == 'tensorflow':
                 warnings.warn('You are using the TensorFlow backend, yet you '

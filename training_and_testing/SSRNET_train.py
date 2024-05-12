@@ -86,13 +86,13 @@ def main():
     with open(os.path.join(db_name + "_models/" + save_name, save_name + '.json'), "w") as f:
         f.write(model.to_json())
 
-    decaylearningrate = TYY_callbacks.DecayLearningRate(start_decay_epoch)
+    decay_learning_rate = TYY_callbacks.DecayLearningRate(start_decay_epoch)
 
     callbacks = [ModelCheckpoint(db_name + "_checkpoints/weights.{epoch:02d}-{val_loss:.2f}.hdf5",
                                  monitor="val_loss",
                                  verbose=1,
                                  save_best_only=True,
-                                 mode="auto"), decaylearningrate
+                                 mode="auto"), decay_learning_rate
                  ]
 
     logging.debug("Running training...")

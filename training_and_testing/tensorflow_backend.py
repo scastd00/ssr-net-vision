@@ -1,6 +1,7 @@
 import tensorflow as tf
 
-from keras.backend.common import image_data_format
+from keras.backend import image_data_format, floatx
+from numpy import dtype
 
 # from keras.backend.tensorflow_backend import _preprocess_conv2d_input
 # from keras.backend.tensorflow_backend import _postprocess_conv2d_output

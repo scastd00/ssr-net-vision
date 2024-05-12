@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+  data:
+
+services:
+  tensorflow-docker:
+    image: tensorflow/tensorflow:latest-gpu-jupyter
+    container_name: tensorflow-docker
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./data:/tf/data
+      - ./demo:/tf/demo
+      - ./pre-trained:/tf/pre-trained
+      - ./training_and_testing:/tf/training_and_testing
+      - ./install_libs.sh:/tf/install_libs.sh
+      - data:/tf
+

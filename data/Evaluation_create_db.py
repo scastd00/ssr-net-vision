@@ -38,6 +38,7 @@ def main():
     out_genders = []
     out_ages = []
     out_imgs = []
+    out_file_paths = []
 
     for i in tqdm(range(len(face_score))):
         if face_score[i] < min_score:
@@ -62,9 +63,10 @@ def main():
 
         img = cv2.imread(image_path)
         out_imgs.append(cv2.resize(img, (img_size, img_size)))
+        out_file_paths.append(image_path)
 
     np.savez(output_path, image=np.array(out_imgs), gender=np.array(out_genders), age=np.array(out_ages),
-             img_size=img_size)
+             img_size=img_size, file_path=np.array(out_file_paths))
 
 
 if __name__ == '__main__':

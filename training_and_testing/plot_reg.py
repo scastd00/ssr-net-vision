@@ -19,7 +19,7 @@ def main():
     input_path = args.input
 
     df = pd.read_hdf(input_path, "history")
-    print(np.min(df['val_mean_absolute_error']))
+    print(np.min(df['val_mae']))
     input_dir = os.path.dirname(input_path)
     plt.plot(df["loss"], '-o', label="loss (age)", linewidth=2.0)
     plt.plot(df["val_loss"], '-o', label="val_loss (age)", linewidth=2.0)
@@ -30,10 +30,10 @@ def main():
     plt.savefig(os.path.join(input_dir, "loss.pdf"), bbox_inches='tight', pad_inches=0)
     plt.cla()
 
-    plt.plot(df["mean_absolute_error"], '-o', label="training", linewidth=2.0)
-    plt.plot(df["val_mean_absolute_error"], '-o', label="validation", linewidth=2.0)
+    plt.plot(df["mae"], '-o', label="training", linewidth=2.0)
+    plt.plot(df["val_mae"], '-o', label="validation", linewidth=2.0)
     ax = plt.gca()
-    ax.set_ylim([2, 13])
+    ax.set_ylim([2, 15])
     ax.set_aspect(0.6 / ax.get_data_ratio())
     plt.xticks(fontsize=20)
     plt.yticks(fontsize=20)
